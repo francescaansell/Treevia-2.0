@@ -1,13 +1,15 @@
+import * as React from 'react';
 import {
   StyleSheet,
   Text,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import Settings from '../Screens/Settings';
 import Home from '../Screens/Home';
 
-const Tab = createTabNavigator(); 
+const Tab = createBottomTabNavigator(); 
 
 export default function Navigator() {
   return (
