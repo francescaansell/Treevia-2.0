@@ -2,12 +2,15 @@ import * as React from 'react';
 import {
   StyleSheet,
   Text,
+  Button,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Settings from '../Screens/Settings';
-import Home from '../Screens/Home';
+import Listings from '../Screens/Listings';
+import Details from '../Screens/Details'
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator(); 
 
@@ -16,8 +19,9 @@ export default function Navigator() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
+          
           name="Plants"
-          component={Home}
+          component={HomeStacks}
         />
         <Tab.Screen
           name="Settings"
@@ -25,6 +29,16 @@ export default function Navigator() {
         />
       </Tab.Navigator>
     </NavigationContainer>
+  );
+}
+
+const Stack = createStackNavigator();
+function HomeStacks () {
+  return (
+    <Stack.Navigator>
+        <Stack.Screen name="Home" component={Listings} />
+        <Stack.Screen name="Details" component={Details} />
+    </Stack.Navigator>
   );
 }
 

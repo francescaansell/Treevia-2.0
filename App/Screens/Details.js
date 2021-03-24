@@ -5,11 +5,12 @@ import { SafeAreaView } from 'react-native';
 
 import Logo from '../Components/Logo'
 
-export default function App ({Navigation}) {
+export default function App ({navigation}) {
     return (
       <SafeAreaView style = {styles.container}>
           <Logo />
-          <Text>Settings!</Text>
+          <Text>Details</Text>
+          
       </SafeAreaView>
         
       

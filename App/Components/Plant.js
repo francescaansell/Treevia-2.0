@@ -6,13 +6,15 @@ import { human } from 'react-native-typography'
 import { Metrics, Colors } from '../Assets/Themes/index'
 import * as WebBrowser from 'expo-web-browser';
 
-export default function Plants(props) {
+import Details from '../Screens/Details'
+
+export default function Plants(props, {navigation}) {
   const [refreshing, setRefreshing] = useState(false);
   const webAction = item => WebBrowser.openBrowserAsync(item.http_image_url);
 
   const listItemRenderer = item => {
     return (
-      <TouchableOpacity onPress={() => webAction(item)}>
+      <TouchableOpacity onPress={() => navigation.navigate('Details')}>
         <View style={styles.plants}>
 
           <View style={styles.plantView}>

@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Images, Metrics } from '../Assets/Themes/index'
 
+
+
 export default function Logo() {
   return (
     <View style={styles.container}>
@@ -16,6 +18,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: Metrics.screenWidth,
-    height: Metrics.images.logo * .6,
+    height: Metrics.images.logo * .5,
   }
 });

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, Button } from 'react-native'
 import Plants from '../Components/Plant'
 import Search from '../Components/Search'
 import Logo from '../Components/Logo'
 import APIRequest from '../Assets/Config/APIRequest'
 
-export default function App({Navigation}) {
+
+
+export default function App({navigation}) {
   const [loading, setLoading] = useState(false);
   const [plants, setPlants] = useState([]);
   const [searchPlantTerm] = useState("");
@@ -38,12 +40,16 @@ export default function App({Navigation}) {
         size="large" color="black" />
     )
   } else {
-    contentDisplayed = <Plants plants={plants} />
+    contentDisplayed = <Plants navigation = {navigation} plants={plants} />
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
       <Search getQuery={loadPlants} />
       <View style={{ flex: 7 }}>
         {contentDisplayed}
