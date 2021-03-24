@@ -40,7 +40,7 @@ export default function App({navigation}) {
         size="large" color="black" />
     )
   } else {
-    contentDisplayed = <Plants navigation = {navigation} plants={plants} />
+    contentDisplayed = <Plants plants={plants} />
   }
 
   return (

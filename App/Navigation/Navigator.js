@@ -11,17 +11,39 @@ import Settings from '../Screens/Settings';
 import Listings from '../Screens/Listings';
 import Details from '../Screens/Details'
 import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator(); 
 
 export default function Navigator() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "Listings") {
+            iconName = focused ? 'leaf' : 'leaf-outline';
+          } else if (route.name === "Settings") {
+            iconName = focused ? 'settings' : 'settings-outline';
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />
+        }
+      })}
+
+      tabBarOptions={{
+        labelStyle: { fontSize: 20 },
+        activeTintColor: 'green',
+        inactiveTintColor: 'grey',
+      
+      }}
+      >
         <Tab.Screen
           
-          name="Plants"
-          component={HomeStacks}
+          name="Listings"
+          component={ListingsStacks}
         />
         <Tab.Screen
           name="Settings"
@@ -33,7 +55,7 @@ export default function Navigator() {
 }
 
 const Stack = createStackNavigator();
-function HomeStacks () {
+function ListingsStacks () {
   return (
     <Stack.Navigator>
         <Stack.Screen name="Home" component={Listings} />

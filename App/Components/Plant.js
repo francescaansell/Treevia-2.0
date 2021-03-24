@@ -2,19 +2,27 @@ import React, { useState } from 'react'
 import { StyleSheet, SafeAreaView, View, FlatList, Text, Linking, ActivityIndicator, TouchableOpacity, Image } from 'react-native'
 // human interface guideline
 // https://github.com/hectahertz/react-native-typography
+
+//https://reactnavigation.org/docs/connecting-navigation-prop/
 import { human } from 'react-native-typography'
 import { Metrics, Colors } from '../Assets/Themes/index'
 import * as WebBrowser from 'expo-web-browser';
 
 import Details from '../Screens/Details'
 
-export default function Plants(props, {navigation}) {
+import { useNavigation } from '@react-navigation/native';
+
+export default function Plants(props, {Details}) {
   const [refreshing, setRefreshing] = useState(false);
-  const webAction = item => WebBrowser.openBrowserAsync(item.http_image_url);
+
+  const navigation = useNavigation();
+  
 
   const listItemRenderer = item => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate('Details')}>
+      <TouchableOpacity 
+        onPress={() => navigation.navigate(Details)}
+        >
         <View style={styles.plants}>
 
           <View style={styles.plantView}>
