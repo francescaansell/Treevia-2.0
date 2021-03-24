@@ -14,6 +14,7 @@ export default function App ({Navigation}) {
     const [isVegChecked, setVegChecked] = useState(false);
     const [isEdibleChecked, setEdibleChecked] = useState(false);
 
+    //Persistent Storage Flower Color
     const setFlowerColorFromStorage = (flowerColor_string) => {
       setFlowerColor(JSON.parse(flowerColor_string));
       console.log("Set flower Color from Storage");
@@ -43,7 +44,9 @@ export default function App ({Navigation}) {
     //Persistent Storage Fruit Color
     const setFruitColorFromStorage = (fruitColor_string) => {
       setFruitColor(JSON.parse(fruitColor_string));
+      console.log(JSON.parse(fruitColor_string));
       console.log("Set fruit Color from Storage");
+      console.log(fruitColor);
     }
     
 
@@ -137,7 +140,7 @@ export default function App ({Navigation}) {
         },
         
         section: {
-          marginBottom: 100, 
+          marginBottom: 80, 
           flexDirection: 'row',
           alignItems: 'center',
         },

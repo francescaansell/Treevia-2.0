@@ -10,18 +10,18 @@ import * as WebBrowser from 'expo-web-browser';
 
 import Details from '../Screens/Details'
 
-import { useNavigation } from '@react-navigation/native';
+//import { useNavigation } from '@react-navigation/native';
 
-export default function Plants(props, {Details}) {
+export default function Plants(props, {route, navigation}) {
   const [refreshing, setRefreshing] = useState(false);
 
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
   
 
   const listItemRenderer = item => {
     return (
       <TouchableOpacity 
-        onPress={() => navigation.navigate(Details)}
+        onPress={() => navigation.navigate('Details')}
         >
         <View style={styles.plants}>
 

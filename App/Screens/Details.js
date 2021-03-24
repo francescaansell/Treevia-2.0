@@ -10,7 +10,6 @@ export default function App ({navigation}) {
       <SafeAreaView style = {styles.container}>
           <Logo />
           <Text>Details</Text>
-          
       </SafeAreaView>
         
       
