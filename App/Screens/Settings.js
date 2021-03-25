@@ -76,14 +76,19 @@ export default function App ({Navigation}) {
 
     return (
       <SafeAreaView style = {styles.container}>
-        <Logo />
-        <View style= {styles.section}>   
-          <Checkbox 
-              value={isVegChecked} 
-              onValueChange={setVegChecked} 
-              color={isVegChecked ? 'green' : undefined}
-            />
-            <Text style= {styles.textStyle}> Vegtable </Text>
+
+        <View style={style.logo}>
+          <Logo />
+        </View>
+        
+        <View style={style.info} >
+          <View style= {styles.section}>   
+            <Checkbox 
+                value={isVegChecked} 
+                onValueChange={setVegChecked} 
+                color={isVegChecked ? 'green' : undefined}
+              />
+              <Text style= {styles.textStyle}> Vegtable </Text>
           </View>
 
           <View style={styles.section}>
@@ -95,30 +100,32 @@ export default function App ({Navigation}) {
             <Text style= {styles.textStyle}> Edible </Text>
           </View>
 
-        <View style= {styles.section}>
-          <Text style= {styles.textStyle}>Flower Color:</Text>
-          <Picker
-            flowerColor={flowerColor}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => storeFlowerColor(itemValue)}
-          >
-              <Picker.Item label="Yellow" value="yellow" />
-              <Picker.Item label="Orange" value="orange" />
-              <Picker.Item label="Red" value="red" />
-      </Picker>
-      </View>
+          <View style= {styles.section}>
+            <Text style= {styles.textStyle}>Flower Color:</Text>
+            <Picker
+              flowerColor={flowerColor}
+              style={{ height: 50, width: 150 }}
+              onValueChange={(itemValue, itemIndex) => storeFlowerColor(itemValue)}
+            >
+                <Picker.Item label="Yellow" value="yellow" />
+                <Picker.Item label="Orange" value="orange" />
+                <Picker.Item label="Red" value="red" />
+            </Picker>
+          </View>
+        
 
-      <View style = {styles.section}>
-        <Text style = {styles.textStyle}>Fruit Color:</Text>
-        <Picker
-            fruitColor={fruitColor}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => storeFruitColor(itemValue)}
-          >
-              <Picker.Item label="Yellow" value="yellow" />
-              <Picker.Item label="Orange" value="orange" />
-              <Picker.Item label="Red" value="red" />
-        </Picker>
+          <View style = {styles.section}>
+            <Text style = {styles.textStyle}>Fruit Color:</Text>
+            <Picker
+              fruitColor={fruitColor}
+              style={{ height: 50, width: 150 }}
+              onValueChange={(itemValue, itemIndex) => storeFruitColor(itemValue)}
+            >
+            <Picker.Item label="Yellow" value="yellow" />
+            <Picker.Item label="Orange" value="orange" />
+            <Picker.Item label="Red" value="red" />
+          </Picker>
+        </View>
       </View>
 
       </SafeAreaView>
@@ -131,7 +138,8 @@ export default function App ({Navigation}) {
           flex: 1,
           backgroundColor: '#fff',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          flexDirection: 'column',
         },
         textStyle: {
           fontSize: 30,
@@ -139,7 +147,7 @@ export default function App ({Navigation}) {
         },
         
         section: {
-          marginBottom: 80, 
+          marginBottom: 40, 
           flexDirection: 'row',
           alignItems: 'center',
         },
@@ -147,5 +155,15 @@ export default function App ({Navigation}) {
         checkbox: {
           margin: 8,
         },
+
+        logo: {
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          height: Metrics.images.logo * .5, 
+        },
+        info: {
+          margin: 20
+        }
       });
     
