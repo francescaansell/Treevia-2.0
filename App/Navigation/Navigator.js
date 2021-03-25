@@ -4,7 +4,7 @@ import {
   Text,
   Button,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Settings from '../Screens/Settings';
@@ -16,6 +16,26 @@ import { Ionicons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator(); 
 
 export default function Navigator() {
+  const dark = {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      primary: '#015824',
+    },
+  };
+
+  const MyTheme = {
+    dark: false,
+    colors: {
+      primary: 'white',
+      background: '#F6F6F6',
+      card: '#4f8f00',
+      text: '291f1e',
+      border: 'rgb(199, 199, 204)',
+      notification: 'rgb(255, 69, 58)',
+    },
+  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -35,7 +55,7 @@ export default function Navigator() {
 
       tabBarOptions={{
         labelStyle: { fontSize: 20 },
-        activeTintColor: 'green',
+        activeTintColor: '#4F8F00',
         inactiveTintColor: 'grey',
       
       }}

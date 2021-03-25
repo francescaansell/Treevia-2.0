@@ -4,6 +4,7 @@ import Plants from '../Components/Plant'
 import Search from '../Components/Search'
 import Logo from '../Components/Logo'
 import APIRequest from '../Assets/Config/APIRequest'
+import Checkbox from 'expo-checkbox';
 
 
 
@@ -31,6 +32,8 @@ export default function App({navigation}) {
 
   useEffect(() => { loadPlants() }, []);
 
+  
+
   let contentDisplayed = null;
 
   if (loading) {
@@ -47,6 +50,7 @@ export default function App({navigation}) {
     <SafeAreaView style={styles.container}>
       <Logo />
       
+
       <Search getQuery={loadPlants} />
       <View style={{ flex: 7 }}>
         {contentDisplayed}

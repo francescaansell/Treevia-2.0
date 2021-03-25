@@ -15,11 +15,11 @@ export default function Search(props) {
 					round
 					lightTheme
 					platform={(Platform.OS === 'ios') ? "ios" : "android"}
-					containerStyle={styles.containerStyle}
-					inputContainerStyle={styles.inputContainerStyle}
+				
+				
 					searchIcon={
 						{ size: Metrics.small },
-						{ color: 'red' }
+						{ color: '#BA3D3B' }
 					}
 					onChangeText={text => setText(text)}
 					onCancel={() => setText("")}
