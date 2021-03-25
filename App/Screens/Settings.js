@@ -7,7 +7,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import { Text, View, StyleSheet, Picker, SafeAreaView } from 'react-native';
-import { CheckBox } from 'react-native-elements'
+import { Checkbox } from 'react-native-paper';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
@@ -18,7 +19,7 @@ import Metrics from '../Assets/Themes/Metrics'
 export default function App ({Navigation}) {
     const [flowercolor, setFlowerColor] = useState("None");
     const [fruitcolor, setFruitColor] = useState("None");
-    const [isVegChecked, setVegChecked] = useState(false);
+    
     
     const [theme, setTheme] = useState('DefaultTheme');
 
@@ -64,9 +65,9 @@ export default function App ({Navigation}) {
     const readFlowerColor = async () => {
       try {
         const storage_flowerColor = await AsyncStorage.getItem('flowerColor');
-        console.log("Trying to find flower Color")
+        //console.log("Trying to find flower Color")
         if (storage_flowerColor !== null) {
-          console.log("Found flower Color " + storage_flowerColor)
+          //console.log("Found flower Color " + storage_flowerColor)
           setFlowerColorFromStorage(storage_flowerColor);
         }
       } catch (e) {
@@ -98,10 +99,6 @@ export default function App ({Navigation}) {
           await AsyncStorage.setItem('fruitColor', "none");
           setFruitColor("None");
         }
-        //console.log("New Value" + newValue);
-        //console.log("Fruit Color inside store fruitcolor: " + fruitcolor);
-     
-        
       } catch (e) {
         console.error(e)
       }
@@ -118,12 +115,15 @@ export default function App ({Navigation}) {
       }
     }
 
-    //Persistent Storage Edible
+    //Persistent Storage Edible////////////////////////////////////////////////////////////
 
-    const [isEdibleChecked, setEdibleChecked] = useState(false);
+    const [edible, setEdible] = useState(false);
 
-    const setEdibleFromStorage = (edible) => {
-      setEdibleChecked(true);
+    const setEdibleFromStorage = (edibleVal) => {
+      console.log("Edible: " + edible)
+      console.log('set edible from storage with edible val ' + edibleVal)
+      setEdible(edibleVal);
+      console.log("Edible: " + edible)
       
     }
  
@@ -131,14 +131,13 @@ export default function App ({Navigation}) {
       try {
           if( newValue == true){
             await AsyncStorage.setItem('edible', true);
-            isEdibleChecked(true);
+            setEdible(true);
+            console.log("set edible to true")
           } else {
             await AsyncStorage.setItem('edible', false);
-            isEdibleChecked(false);
+            setEdible(false);
+            console.log("set edible to false")
           }
-          
-          console.log("New Value" + newValue);
-          console.log("Edible Checked inside store edible: " + isEdibleChecked);
         }
        catch (e) {
         console.error(e)
@@ -150,21 +149,56 @@ export default function App ({Navigation}) {
     const readEdible = async () => {
       try {
         const storage_Edible= await AsyncStorage.getItem('edible');
-        console.log("Trying to find edible")
-        if (storage_edible !== null) {
-          console.log("Found edible " + storage_Edible)
-          setFlowerColorFromStorage(storage_Edible);
+        if (storage_Edible !== null) {
+          setEdibleFromStorage(storage_Edible);
         }
       } catch (e) {
         console.error(e);
       }
     }
 
+    //Persistent storage Vegtable/////////////////////////////////////////////////////////////
 
+    const [veg, setVeg] = useState(false);
+
+    const setVegFromStorage = (vegVal) => {
+      console.log('set veg from storage' + vegVal)
+      setVeg(vegVal);
+    }
+ 
+    const storeVeg = async (newValue) => {
+      try {
+          if( newValue == true){
+            await AsyncStorage.setItem('veg', true);
+            setVeg(true);
+          } else {
+            await AsyncStorage.setItem('veg', false);
+            setVeg(false);
+          }
+        }
+       catch (e) {
+        console.error(e)
+      }
+      
+    };
+
+    //On load
+    const readVeg = async () => {
+      try {
+        const storage_veg = await AsyncStorage.getItem('veg');
+        if (storage_veg !== null) {
+          setVegFromStorage(storage_veg);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
     
     useEffect(() => {
       readFlowerColor();
       readFruitColor();
+      readVeg();
+      readEdible();
     }, [])
     
 
@@ -221,18 +255,18 @@ export default function App ({Navigation}) {
         <View style={styles.info} >
           <View style= {styles.section}>   
             <Checkbox 
-                checked={isVegChecked} 
-                onPress = {() => setVegChecked(!isVegChecked)} 
-                //color={isVegChecked ? 'green' : undefined}
-              />
+              status={veg ? 'checked' : 'unchecked'}
+              onPress={() => storeVeg(!veg)}
+              color = "green"
+            />
               <Text style= {styles.textStyle}> Vegtable </Text>
           </View>
 
           <View style={styles.section}>
             <Checkbox 
-              checked={isEdibleChecked} 
-              onPress={ () => setEdibleChecked(!isEdibleChecked)} 
-              //color={isEdibleChecked ? 'green' : undefined}
+              status={edible? 'checked' : 'unchecked'}
+              onPress={() => storeEdible(!edible)}
+              color = "green"
             />
             <Text style= {styles.textStyle}> Edible </Text>
           </View>
