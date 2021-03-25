@@ -18,6 +18,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: Metrics.screenWidth,
-    height: Metrics.images.logo * .5,
+    height: Metrics.images.logo * .4,
   }
 });

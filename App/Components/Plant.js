@@ -12,16 +12,18 @@ import Details from '../Screens/Details'
 
 //import { useNavigation } from '@react-navigation/native';
 
-export default function Plants(props, {route, navigation}) {
+export default function Plants(props) {
   const [refreshing, setRefreshing] = useState(false);
 
   //const navigation = useNavigation();
+
+
   
 
   const listItemRenderer = item => {
     return (
       <TouchableOpacity 
-        onPress={() => navigation.navigate('Details')}
+        onPress={() => props.navigation.navigate('Details', {myParam: item})}
         >
         <View style={styles.plants}>
 

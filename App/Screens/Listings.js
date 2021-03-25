@@ -46,10 +46,7 @@ export default function App({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      
       <Search getQuery={loadPlants} />
       <View style={{ flex: 7 }}>
         {contentDisplayed}

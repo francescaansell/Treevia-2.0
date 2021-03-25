@@ -19,7 +19,6 @@ export default function App ({Navigation}) {
       setFlowerColor(JSON.parse(flowerColor_string));
       console.log("Set flower Color from Storage");
     }
-    
 
     const storeFlowerColor = async (newValue) => {
       try {
