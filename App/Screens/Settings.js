@@ -7,6 +7,7 @@ import Checkbox from 'expo-checkbox';
 import Logo from '../Components/Logo'
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Metrics from '../Assets/Themes/Metrics'
 
 export default function App ({Navigation}) {
     const [flowerColor, setFlowerColor] = useState();
@@ -77,11 +78,11 @@ export default function App ({Navigation}) {
     return (
       <SafeAreaView style = {styles.container}>
 
-        <View style={style.logo}>
+        <View style={styles.logo}>
           <Logo />
         </View>
         
-        <View style={style.info} >
+        <View style={styles.info} >
           <View style= {styles.section}>   
             <Checkbox 
                 value={isVegChecked} 
