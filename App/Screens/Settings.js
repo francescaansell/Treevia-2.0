@@ -7,7 +7,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import { Text, View, StyleSheet, Picker, SafeAreaView } from 'react-native';
-import { Checkbox } from 'react-native-paper';
+import { CheckBox } from 'react-native-elements'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,15 +16,9 @@ import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/
 import Logo from '../Components/Logo'
 import Metrics from '../Assets/Themes/Metrics'
 
-export default function App ({Navigation}) {
+export default function App (props) {
     const [flowercolor, setFlowerColor] = useState("None");
-    const [fruitcolor, setFruitColor] = useState("None");
-    
-    
-    const [theme, setTheme] = useState('DefaultTheme');
-
-    //Persistent Storage Flower Color
-
+  
     //If flower color in storage
     const setFlowerColorFromStorage = (flowerColor_string) => {
       //console.log("Flower Color" + flowercolor);
@@ -75,7 +69,10 @@ export default function App ({Navigation}) {
       }
     }
 
-    //Persistent Storage Fruit Color
+    //Persistent Storage Fruit Color //////////////////////////////////////
+
+    const [fruitcolor, setFruitColor] = useState("None");
+
     const setFruitColorFromStorage = (fruitColor_string) => {
       setFruitColor(fruitColor_string);
     }
@@ -120,10 +117,14 @@ export default function App ({Navigation}) {
     const [edible, setEdible] = useState(false);
 
     const setEdibleFromStorage = (edibleVal) => {
-      console.log("Edible: " + edible)
-      console.log('set edible from storage with edible val ' + edibleVal)
-      setEdible(edibleVal);
-      console.log("Edible: " + edible)
+      //onsole.log("Edible: " + edible)
+      //console.log('set edible from storage with edible val ' + edibleVal)
+      if (edibleVal == "true"){
+        setEdible(true);
+      }else {
+        setEdible(false);
+      }
+      //console.log("Edible: " + edible)
       
     }
  
@@ -132,11 +133,11 @@ export default function App ({Navigation}) {
           if( newValue == true){
             await AsyncStorage.setItem('edible', true);
             setEdible(true);
-            console.log("set edible to true")
+            //console.log("set edible to true")
           } else {
             await AsyncStorage.setItem('edible', false);
             setEdible(false);
-            console.log("set edible to false")
+            //console.log("set edible to false")
           }
         }
        catch (e) {
@@ -162,8 +163,17 @@ export default function App ({Navigation}) {
     const [veg, setVeg] = useState(false);
 
     const setVegFromStorage = (vegVal) => {
-      console.log('set veg from storage' + vegVal)
-      setVeg(vegVal);
+      //console.log("old veg " + veg);
+      if (vegVal == "true"){
+        //console.log('true');
+        setVeg(true);
+      } else {
+        setVeg(false);
+        //console.log('false');
+      }
+      ///console.log('set veg from storage ' + vegVal);
+      //console.log("new veg " + veg);
+
     }
  
     const storeVeg = async (newValue) => {
@@ -181,8 +191,6 @@ export default function App ({Navigation}) {
       }
       
     };
-
-    //On load
     const readVeg = async () => {
       try {
         const storage_veg = await AsyncStorage.getItem('veg');
@@ -199,13 +207,16 @@ export default function App ({Navigation}) {
       readFruitColor();
       readVeg();
       readEdible();
+      console.log("Edible: " + edible);
+      console.log("Veg: " + veg);
     }, [])
     
 
-    /* 
+    const [theme, setTheme] = useState('DefaultTheme');
+
     const changeTheme = (item) => {
       if (item == "DarkTheme"){
-        Navigation.setDefaultOptions({
+        props.Navigation.setDefaultOptions({
           ...DarkTheme,
           colors: {
             ...DarkTheme.colors,
@@ -220,8 +231,9 @@ export default function App ({Navigation}) {
           }
         });
         setTheme("DarkTheme");
+        console.log("set Theme Dark Theme")
       } else {
-        Navigation.setDefaultOptions({
+        props.Navigation.setDefaultOptions({
           ...DefaultTheme, 
           colors: {
             ...DefaultTheme.colors,
@@ -236,6 +248,7 @@ export default function App ({Navigation}) {
           }
         });
         setTheme("DefaultTheme")
+        console.log("Default theme")
       }
      
       
@@ -243,7 +256,6 @@ export default function App ({Navigation}) {
       
     }
 
-    */
 
     return (
       <SafeAreaView style = {styles.container}>
@@ -254,19 +266,19 @@ export default function App ({Navigation}) {
         
         <View style={styles.info} >
           <View style= {styles.section}>   
-            <Checkbox 
-              status={veg ? 'checked' : 'unchecked'}
+            <CheckBox 
+              checked ={veg}
               onPress={() => storeVeg(!veg)}
-              color = "green"
+              checkedColor = "green"
             />
-              <Text style= {styles.textStyle}> Vegtable </Text>
+              <Text style= {styles.textStyle}> Vegetable </Text>
           </View>
 
           <View style={styles.section}>
-            <Checkbox 
-              status={edible? 'checked' : 'unchecked'}
+            <CheckBox 
+              checked ={edible}
               onPress={() => storeEdible(!edible)}
-              color = "green"
+              checkedColor = "green"
             />
             <Text style= {styles.textStyle}> Edible </Text>
           </View>
@@ -304,7 +316,7 @@ export default function App ({Navigation}) {
           <Picker
               theme={theme}
               style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue) => setTheme(itemValue)}
+              onValueChange={(itemValue) => changeTheme(itemValue)}
             >
             <Picker.Item label="Default Theme" value="DefaultTheme" />
             <Picker.Item label="Dark Theme" value="DarkTheme" />
