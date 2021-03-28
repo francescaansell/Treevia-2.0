@@ -6,19 +6,9 @@ import { StyleSheet, SafeAreaView, View, FlatList, Text, Linking, ActivityIndica
 //https://reactnavigation.org/docs/connecting-navigation-prop/
 import { human } from 'react-native-typography'
 import { Metrics, Colors } from '../Assets/Themes/index'
-import * as WebBrowser from 'expo-web-browser';
-
-import Details from '../Screens/Details'
-
-//import { useNavigation } from '@react-navigation/native';
 
 export default function Plants(props) {
   const [refreshing, setRefreshing] = useState(false);
-
-  //const navigation = useNavigation();
-
-
-  
 
   const listItemRenderer = item => {
     return (
@@ -26,7 +16,6 @@ export default function Plants(props) {
         onPress={() => props.navigation.navigate('Details', {myParam: item})}
         >
         <View style={styles.plants}>
-
           <View style={styles.plantView}>
             <Image style={styles.plantPicture}
               source={{ uri: item.http_image_url }} />

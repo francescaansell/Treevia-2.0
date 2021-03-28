@@ -14,7 +14,7 @@ export default function Search(props) {
 				<SearchBar
 					round
 					lightTheme
-					platform={(Platform.OS === 'ios') ? "ios" : "android"}
+					platform={(Platform.OS === 'android') ? "ios" : "android"}
 				
 				
 					searchIcon={

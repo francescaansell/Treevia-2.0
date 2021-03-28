@@ -14,13 +14,11 @@ export default function App ({route, navigation}) {
         <View style = {styles.logo}>
           <Logo />
         </View>
-        
         <View style = {styles.info}>
             <View style = {styles.section} >
               <Image style={styles.plantPicture}
                 source={{ uri: myParam.http_image_url }} />
             </View>
-            
             <View style = {styles.section} >
               <Text style={styles.textStyle} > Common Name: {myParam.common_name}</Text>
             </View>
@@ -34,10 +32,7 @@ export default function App ({route, navigation}) {
               <Text style={styles.textStyle} > Genus: {myParam.genus}</Text>
             </View>
           </View>
-          
       </SafeAreaView>
-        
-      
     );
 }
 

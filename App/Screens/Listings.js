@@ -11,8 +11,6 @@ import Checkbox from 'expo-checkbox';
 export default function App({navigation}) {
   const [loading, setLoading] = useState(false);
   const [plants, setPlants] = useState([]);
-  const [searchPlantTerm] = useState("");
-  const [searchSpeciesTerm] = useState("");
 
   // retrieve lists of plants
   const loadPlants = async (plantSearch = '', plantFilter = '') => {
@@ -32,8 +30,6 @@ export default function App({navigation}) {
 
   useEffect(() => { loadPlants() }, []);
 
-  
-
   let contentDisplayed = null;
 
   if (loading) {
@@ -49,13 +45,10 @@ export default function App({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <Logo />
-      
-
       <Search getQuery={loadPlants} />
       <View style={{ flex: 7 }}>
         {contentDisplayed}
       </View>
-
     </SafeAreaView>
   );
 }

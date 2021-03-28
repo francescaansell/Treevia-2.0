@@ -11,7 +11,7 @@ import { CheckBox } from 'react-native-elements'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme, DefaultTheme, TabRouter } from '@react-navigation/native';
 
 import Logo from '../Components/Logo'
 import Metrics from '../Assets/Themes/Metrics'
@@ -207,23 +207,25 @@ export default function App (props) {
       readFruitColor();
       readVeg();
       readEdible();
-      console.log("Edible: " + edible);
-      console.log("Veg: " + veg);
+      //console.log("Edible: " + edible);
+      //console.log("Veg: " + veg);
+      
     }, [])
     
+    const [theme, onChangeTheme ] = useState("Theme");
 
-    const [theme, setTheme] = useState('DefaultTheme');
-
-    const changeTheme = (item) => {
+    /*
+     const changeTheme = () => {
+      console.log("Enter Change Theme");
       if (item == "DarkTheme"){
-        props.Navigation.setDefaultOptions({
+        navigation.setDefaultOptions({
           ...DarkTheme,
           colors: {
             ...DarkTheme.colors,
             primary: '#015824',
           },
         });
-        Navigation.setRoot({
+        navigation.setRoot({
           root: {
             stack: {
              
@@ -233,14 +235,14 @@ export default function App (props) {
         setTheme("DarkTheme");
         console.log("set Theme Dark Theme")
       } else {
-        props.Navigation.setDefaultOptions({
+        navigation.setDefaultOptions({
           ...DefaultTheme, 
           colors: {
             ...DefaultTheme.colors,
             primary: 'black'
           }
         });
-        Navigation.setRoot({
+        navigation.setRoot({
           root: {
             stack: {
               
@@ -250,12 +252,7 @@ export default function App (props) {
         setTheme("DefaultTheme")
         console.log("Default theme")
       }
-     
-      
-      console.log(item + "Change Theme");
-      
-    }
-
+        */
 
     return (
       <SafeAreaView style = {styles.container}>
@@ -314,9 +311,9 @@ export default function App (props) {
 
         <View style= {styles.section}>   
           <Picker
-              theme={theme}
+              selectedValue={theme}
               style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue) => changeTheme(itemValue)}
+              onValueChange={(itemValue) => onChangeTheme(itemValue)}
             >
             <Picker.Item label="Default Theme" value="DefaultTheme" />
             <Picker.Item label="Dark Theme" value="DarkTheme" />

@@ -12,6 +12,8 @@ import Listings from '../Screens/Listings';
 import Details from '../Screens/Details'
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
+import { Colors } from '../Assets/Themes/Colors'
+import { Metrics } from '../Assets/Themes/Metrics';
 
 const Tab = createBottomTabNavigator(); 
 
@@ -25,19 +27,21 @@ export default function Navigator() {
   };
 
   const MyTheme = {
-    dark: false,
+    dark: true,
     colors: {
       primary: 'white',
-      background: '#F6F6F6',
-      card: '#4f8f00',
-      text: '291f1e',
-      border: 'rgb(199, 199, 204)',
+      background: 'white',
+      card: '#E3B1B0', 
+      text: '#505050',
+      border:  '#505050', 
       notification: 'rgb(255, 69, 58)',
     },
   };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme = {MyTheme}
+    >
       <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -50,14 +54,21 @@ export default function Navigator() {
           }
 
           return <Ionicons name={iconName} size={size} color={color} />
-        }
+        }, 
+        headerStyle: {
+          backgroundColor: 'black',
+        },
+        
       })}
 
       tabBarOptions={{
         labelStyle: { fontSize: 20 },
         activeTintColor: '#4F8F00',
-        inactiveTintColor: 'grey',
-      
+        inactiveTintColor: '#505050',
+        style: {
+          padding: 5,
+          height: 50,
+        },
       }}
       >
         <Tab.Screen
@@ -75,10 +86,11 @@ export default function Navigator() {
 }
 
 const Stack = createStackNavigator();
+
 function ListingsStacks () {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Home" component={Listings} />
+        <Stack.Screen name="Listings" component={Listings} />
         <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>
   );
