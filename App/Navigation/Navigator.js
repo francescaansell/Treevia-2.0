@@ -14,6 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../Assets/Themes/Colors'
 import { Metrics } from '../Assets/Themes/Metrics';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator(); 
 
@@ -29,7 +30,7 @@ export default function Navigator() {
   const MyTheme = {
     dark: true,
     colors: {
-      primary: 'white',
+      primary: '#4F8F00',
       background: 'white',
       card: '#E3B1B0', 
       text: '#505050',
@@ -55,9 +56,7 @@ export default function Navigator() {
 
           return <Ionicons name={iconName} size={size} color={color} />
         }, 
-        headerStyle: {
-          backgroundColor: 'black',
-        },
+        
         
       })}
 
@@ -66,8 +65,16 @@ export default function Navigator() {
         activeTintColor: '#4F8F00',
         inactiveTintColor: '#505050',
         style: {
-          padding: 5,
-          height: 50,
+          ...Platform.select({
+            ios: {
+              padding: 5, 
+              height: 90,
+            }, 
+            android: {
+              padding: 5, 
+              height: 50, 
+            }
+          })
         },
       }}
       >
@@ -90,8 +97,55 @@ const Stack = createStackNavigator();
 function ListingsStacks () {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Listings" component={Listings} />
-        <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen 
+          name="Listings" 
+          component={Listings} 
+          options= {{
+            headerStyle: {
+            ...Platform.select({
+              android: {
+                height: 65, 
+              }, 
+              ios: {
+                height: 90, 
+              }
+            })
+          },
+          headerTitleStyle: {
+            marginBottom: 20,  
+            alignSelf: 'center',
+            textAlign: "center",
+            justifyContent: 'center',
+            flex: 1,
+            textAlignVertical: 'center',
+            ...Platform.select({
+              android: {
+                marginBottom: 30,
+              }, 
+              ios: {
+                
+              }
+            })
+          }
+
+          }}
+        />
+        <Stack.Screen 
+          name="Details" 
+          component={Details}
+          options= {{
+            headerStyle: {
+            ...Platform.select({
+              android: {
+                height: 90, 
+              }, 
+              ios: {
+                height: 90, 
+              }
+            })
+          }
+          }}
+           />
     </Stack.Navigator>
   );
 }

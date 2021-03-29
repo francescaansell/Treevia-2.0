@@ -7,6 +7,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import { Text, View, StyleSheet, Picker, SafeAreaView } from 'react-native';
+
+
 import { CheckBox } from 'react-native-elements'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -131,11 +133,11 @@ export default function App (props) {
     const storeEdible = async (newValue) => {
       try {
           if( newValue == true){
-            await AsyncStorage.setItem('edible', true);
+            await AsyncStorage.setItem('edible', "true");
             setEdible(true);
             //console.log("set edible to true")
           } else {
-            await AsyncStorage.setItem('edible', false);
+            await AsyncStorage.setItem('edible', "false");
             setEdible(false);
             //console.log("set edible to false")
           }
@@ -179,10 +181,10 @@ export default function App (props) {
     const storeVeg = async (newValue) => {
       try {
           if( newValue == true){
-            await AsyncStorage.setItem('veg', true);
+            await AsyncStorage.setItem('veg', "true");
             setVeg(true);
           } else {
-            await AsyncStorage.setItem('veg', false);
+            await AsyncStorage.setItem('veg', "false");
             setVeg(false);
           }
         }
@@ -280,46 +282,62 @@ export default function App (props) {
             <Text style= {styles.textStyle}> Edible </Text>
           </View>
 
-          <View style= {styles.section}>
+          </View>
+          <View style = {styles.info}>
+
+          <View style= {styles.lowerSection}>
+
             <Text style= {styles.textStyle}>Flower Color:</Text>
-            <Picker
-              selectedValue={flowercolor}
-              style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue, itemIndex) => storeFlowerColor(itemValue)}
-            >
+            <View style = {styles.pickerStyle}>
+              <Picker
+                selectedValue={flowercolor}
+                style={{ height: 50, width: 150 }}
+                onValueChange={(itemValue, itemIndex) => storeFlowerColor(itemValue)}
+                mode = {'dropdown'}
+              >
+                  <Picker.Item label="None" value="none" />
+                  <Picker.Item label="Yellow" value="yellow" />
+                  <Picker.Item label="Orange" value="orange" />
+                  <Picker.Item label="Red" value="red" />
+              </Picker>
+            </View>
+          </View>
+        
+
+          <View style = {styles.lowerSection}>
+
+            <Text style = {styles.textStyle}>Fruit Color:</Text>
+            <View style = {styles.pickerStyle}>
+              <Picker
+                  selectedValue ={fruitcolor}
+                  style={{ height: 50, width: 150 }}
+                  onValueChange={(itemValue, itemIndex) => storeFruitColor(itemValue)}
+                  mode = {'dropdown'}
+                >
                 <Picker.Item label="None" value="none" />
                 <Picker.Item label="Yellow" value="yellow" />
                 <Picker.Item label="Orange" value="orange" />
                 <Picker.Item label="Red" value="red" />
-            </Picker>
-          </View>
-        
-
-          <View style = {styles.section}>
-            <Text style = {styles.textStyle}>Fruit Color:</Text>
-            <Picker
-              selectedValue ={fruitcolor}
-              style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue, itemIndex) => storeFruitColor(itemValue)}
-            >
-            <Picker.Item label="None" value="none" />
-            <Picker.Item label="Yellow" value="yellow" />
-            <Picker.Item label="Orange" value="orange" />
-            <Picker.Item label="Red" value="red" />
-          </Picker>
+              </Picker>
+            </View>
+            
         </View>
 
+{/*
         <View style= {styles.section}>   
           <Picker
               selectedValue={theme}
-              style={{ height: 50, width: 150 }}
+              style={{ height: 50, width: 150 , borderWidth: 1}}
               onValueChange={(itemValue) => onChangeTheme(itemValue)}
+              mode = {'dropdown'}
             >
             <Picker.Item label="Default Theme" value="DefaultTheme" />
             <Picker.Item label="Dark Theme" value="DarkTheme" />
           </Picker>
               <Text style= {styles.textStyle}> Dark Theme </Text>
         </View>
+
+*/ }
       </View>
 
       </SafeAreaView>
@@ -333,33 +351,45 @@ export default function App (props) {
         container: {
           flex: 1,
           backgroundColor: '#fff',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           flexDirection: 'column',
+          
         },
         textStyle: {
-          fontSize: 30,
-          padding: 20, 
+          fontSize: 15,
+          padding: 10, 
+          flexDirection: 'column',
+          alignItems: 'center',
+      
         },
         
         section: {
-          marginBottom: 40, 
+          margin: 30, 
           flexDirection: 'row',
           alignItems: 'center',
-        },
+                
+        }, 
+        lowerSection: {
         
+          flexDirection: 'column', 
+          margin: 30, 
+        }, 
+
         checkbox: {
           margin: 8,
         },
 
         logo: {
-          flexDirection: 'column',
-          alignItems: 'center',
+          
+         
           justifyContent: 'flex-start',
           height: Metrics.images.logo * .5, 
+   
         },
         info: {
-          margin: 20
+          margin: 20,
+          flexDirection: 'row', 
         }
       });
     

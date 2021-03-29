@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Button, TextInput, TouchableOpacity, TouchableWithoutFeedback, Platform, Keyboard } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import {  StyleSheet, View, Button, TextInput, TouchableOpacity, TouchableWithoutFeedback, Platform, Keyboard } from 'react-native'
 import { Metrics, Colors } from '../Assets/Themes/index'
 import { SearchBar } from 'react-native-elements'
 
@@ -8,14 +8,17 @@ import { SearchBar } from 'react-native-elements'
 export default function Search(props) {
 	console.log(props)
 	const [text, setText] = useState("");
+
+	
 	return (
 		<TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
 			<View style={styles.container}>
 				<SearchBar
 					round
 					lightTheme
-					platform={(Platform.OS === 'android') ? "ios" : "android"}
-				
+					platform={(Platform.OS)}
+					containerStyle={styles.containerStyle}
+					inputContainerStyle={styles.inputContainerStyle}
 				
 					searchIcon={
 						{ size: Metrics.small },
